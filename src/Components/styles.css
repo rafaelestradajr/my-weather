@@ -1,5 +1,8 @@
 @import url('https://fonts.googleapis.com/css2?family=Recursive&display=swap');
-
+.flex{
+    display: flex;
+    justify-content: space-between;
+}
 .main{
     width: 700px;
     border-radius: 15px;
@@ -28,4 +31,8 @@
     color: whitesmoke;
     font-family: 'Recursive', sans-serif;
     font-size: 18px;
+}
+button{
+    width: 35px;
+    height: 35px;
 }
