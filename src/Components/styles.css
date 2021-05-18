@@ -1,12 +1,9 @@
 @import url('https://fonts.googleapis.com/css2?family=Recursive&display=swap');
-.flex{
-    display: flex;
-    justify-content: space-between;
-}
+
 .main{
     width: 700px;
     border-radius: 15px;
-    background-color: #01579b;
+    background-color: #beb248e1;
 }
 
 .header{
@@ -36,3 +33,11 @@ button{
     width: 35px;
     height: 35px;
 }
+
+.flex{
+    display: flex;
+    justify-content: space-between;
+    
+  }
+ 
+  
