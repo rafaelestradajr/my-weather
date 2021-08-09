@@ -1,21 +1,22 @@
+import "./App.css";
 import React, { useEffect, useState } from "react";
-import './App.css';
-import Weather from './Components/Weather';
-
+import Weather from "./Components/weather";
+import { Dimmer, Loader } from 'semantic-ui-react';
 
 export default function App() {
-  const [lat,setLat]=useState([]);
-  const [long,setLong] = useState([]);
-  const [data,setData] = useState([]);
+
+  const [lat, setLat] = useState([]);
+  const [long, setLong] = useState([]);
+  const [data, setData] = useState([]);
 
   useEffect(() => {
     const fetchData = async () => {
-    navigator.geolocation.getCurrentPosition(function(position) {
+      navigator.geolocation.getCurrentPosition(function(position) {
       setLat(position.coords.latitude);
       setLong(position.coords.longitude);
-    });
+      });
 
-    await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`)
+      await fetch(`${process.env.REACT_APP_API_URL}/weather/?lat=${lat}&lon=${long}&units=imperial&APPID=${process.env.REACT_APP_API_KEY}`)
       .then(res => res.json())
       .then(result => {
         setData(result)
@@ -23,16 +24,19 @@ export default function App() {
       });
     }
     fetchData();
-
-    //console.log("Latitude is:", lat)
-   // console.log("Longitude is:", long)
-  }, [lat, long])
+  }, [lat, long]);
 
   return (
     <div className="App">
-    <Weather weatherData={data}/>
+    {(typeof data.main != 'undefined') ? (
+        <Weather weatherData={data}/>
+      ): (
+        <div>
+          <Dimmer active>
+            <Loader>Loading..</Loader>
+          </Dimmer>
+       </div>
+     )}
     </div>
   );
 }
-
-
